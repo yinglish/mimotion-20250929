@@ -281,17 +281,21 @@ def push_to_push_plus(exec_results, summary):
 
 
 def run_single_account(total, idx, user_mi, passwd_mi):
+    print("one accuont begins")
     idx_info = ""
     if idx is not None:
         idx_info = f"[{idx + 1}/{total}]"
     log_str = f"[{format_now()}]\n{idx_info}账号：{desensitize_user_name(user_mi)}"
     try:
+        print(user_mi)
+        print(passwd_mi)
         runner = MiMotionRunner(user_mi, passwd_mi)
         exec_msg, success = runner.login_and_post_step(min_step, max_step)
         log_str += runner.log_str
         log_str += f'{exec_msg}\n'
         exec_result = {"user": user_mi, "success": success,
                        "msg": exec_msg}
+        print(exec_result)
     except:
         log_str += f"执行异常:{traceback.format_exc()}\n"
         log_str += traceback.format_exc()
