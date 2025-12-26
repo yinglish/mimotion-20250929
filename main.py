@@ -204,7 +204,7 @@ class MiMotionRunner:
                 "source": "com.xiaomi.hm.health",
                 "third_name": "email",
             }
-        print(data)
+        print(data2)
         print(headers)
         r21 = requests.post(url2, data=data2, headers=headers)
         print(r21)
