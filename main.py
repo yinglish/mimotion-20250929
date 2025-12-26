@@ -153,14 +153,18 @@ class MiMotionRunner:
             'redirect_uri': 'https://s3-us-west-2.amazonaws.com/hm-registration/successsignin.html',
         }
         # 等同 http_build_query，默认使用 quote_plus 将空格转为 '+'
+        print(login_data)
         query = urllib.parse.urlencode(login_data)
         plaintext = query.encode('utf-8')
         # 执行请求加密
         cipher_data = encrypt_data(plaintext)
+        print(cipher_data)
 
         url1 = 'https://api-user.zepp.com/v2/registrations/tokens'
         r1 = requests.post(url1, data=cipher_data, headers=headers, allow_redirects=False)
+        print(r1)
         location = r1.headers["Location"]
+        print(location)
         try:
             code = get_access_token(location)
             if code is None:
@@ -228,7 +232,7 @@ class MiMotionRunner:
         self.log_str += f"已设置为随机步数范围({min_step}~{max_step}) 随机值:{step}\n"
         login_token, userid = self.login()
         if login_token == 0:
-            return "登陆失败！", False
+            return "登录失败！", False
 
         t = get_time()
 
@@ -281,11 +285,12 @@ def push_to_push_plus(exec_results, summary):
 
 
 def run_single_account(total, idx, user_mi, passwd_mi):
-    print("one accuont begins")
+    print("one account begins")
     idx_info = ""
     if idx is not None:
         idx_info = f"[{idx + 1}/{total}]"
     log_str = f"[{format_now()}]\n{idx_info}账号：{desensitize_user_name(user_mi)}"
+    print(log_str)
     try:
         print(user_mi)
         print(passwd_mi)
