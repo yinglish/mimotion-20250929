@@ -204,6 +204,10 @@ class MiMotionRunner:
                 "source": "com.xiaomi.hm.health",
                 "third_name": "email",
             }
+        print(data)
+        print(headers)
+        r21 = requests.post(url2, data=data2, headers=headers)
+        print(r21)
         r2 = requests.post(url2, data=data2, headers=headers).json()
         login_token = r2["token_info"]["login_token"]
         # print("login_token获取成功！")
